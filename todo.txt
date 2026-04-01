@@ -1,0 +1,4 @@
+- Include logic for misses in search functions.
+- Implement multiprocessing parallel merge sort.
+- Inlude notes on runtime complexity.
+- Merge data.
