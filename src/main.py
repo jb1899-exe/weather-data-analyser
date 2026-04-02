@@ -1,3 +1,7 @@
+from .modules import sorting, searching, pmsort
+import numbers
+
+
 def get_head(arr, n):
     '''Returns first n values of array.'''
 
@@ -56,19 +60,72 @@ def main() -> None:
         filename_input = input('\nPlease enter a filename to load (enter "quit" to exit): ')
         if filename_input in filepaths:
             data = load_data(datapath, filename_input)
+            new_data = list(data) # making copy doesn't really make sense
             
             while True:
-                operation_input = input('\nPlease enter an operation (search, sort, merge): ').lower()
+                operation_input = input('\nPlease enter an operation (search, sort, merge) (enter "quit" to exit): ').lower()
                 if operation_input == 'search':
-                    print('Searching...')
-                    break
+                    while True:
+                        target_input = float(input('\nPlease enter a target value (enter "quit" to exit): '))
+                        if isinstance(float(target_input), numbers.Number): # validate target is a number
+                            search_input = input('\nPlease enter a search algorithm (linear, binary) (enter "quit" to exit): ').lower()
+                            if search_input == 'linear':
+                                target_index = searching.linear_search(new_data, target_input)
+                                if target_index == -1:
+                                    print('\nTarget not found!')
+                                    break
+                                else:
+                                    print(f'\nTarget found at index {target_index}!')
+                                    break
+                            elif search_input == 'binary':
+                                target_index = searching.binary_search(new_data, target_input)
+                                if target_index == -1:
+                                    print('\nTarget not found!')
+                                    break
+                                else:
+                                    print(f'\nTarget found at index {target_index}!')
+                                    break
+                            elif filename_input.lower() in ['q', 'quit']:
+                                print('Quitting...\n')
+                                break
+                            else:
+                                print('Please enter a valid input!\n')
+                        else:
+                            print('Please enter a valid input!\n')
                 
                 elif operation_input == 'sort':
-                    print('Sorting...')
-                    break
+                    while True:
+                        # add ascending / descending
+                        sort_input = input('\nPlease enter a search algorithm (bubble, insertion, quick, merge) (enter "quit" to exit): ').lower()
+                        if sort_input == 'bubble':
+                            new_data = sorting.bubble_sort(data)
+                            print(get_head(new_data, 10))
+                            break
+                        elif sort_input == 'insertion':
+                            new_data = sorting.insertion_sort(data)
+                            print(get_head(new_data, 10))
+                            break
+                        elif sort_input == 'quick':
+                            # TODO: maximum depth error
+                            new_data = sorting.quick_sort(data)
+                            print(get_head(new_data, 10))
+                            break
+                        elif sort_input == 'merge':
+                            new_data = sorting.merge_sort(data)
+                            print(get_head(new_data, 10))
+                            break
+                        elif filename_input.lower() in ['q', 'quit']:
+                            print('Quitting...\n')
+                            break
+                        else:
+                            print('Please enter a valid input!\n')
                 
                 elif operation_input == 'merge':
                     print('Merging...')
+                    break
+
+                elif filename_input.lower() in ['q', 'quit']:
+                    print('Quitting...\n')
                     break
                 
                 else:

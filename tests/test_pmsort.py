@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import random
-from src.pmsort import mergesort_seq, mergesort_parallel
+from modules.pmsort import mergesort_seq, mergesort_parallel
 
 def test_parallel_matches_sequential():
     print("Running test: parallel_matches_sequential...")

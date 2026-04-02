@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import random
-from src.sorting import bubble_sort, insertion_sort, merge_sort, quick_sort
+from modules.sorting import bubble_sort, insertion_sort, merge_sort, quick_sort
 
 def test_basic_correctness_all_algos():
     print("Running test: basic_correctness_all_algos...")

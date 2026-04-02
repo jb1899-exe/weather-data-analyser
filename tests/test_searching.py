@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.searching import linear_search_all, binary_search_all, nearest_values
+from modules.searching import linear_search_all, binary_search_all, nearest_values
 
 def test_search_hits_and_nearest():
     print("Running test: search_hits_and_nearest...")
