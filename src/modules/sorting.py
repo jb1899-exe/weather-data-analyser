@@ -140,6 +140,7 @@ def merge_sort(arr: list, ascending: bool = True) -> list:
         
 
 def quick_sort(arr, start_index = None, end_index = None):
+    # breaks when used, check logic
 
     def swap_vals(arr, a, b):
         '''Swaps values in-place in arr at indices a and b.'''
