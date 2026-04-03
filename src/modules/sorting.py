@@ -47,35 +47,21 @@ def bubble_sort(arr: list, ascending: bool = True, in_place: bool = False) -> No
         return sorted_arr
     
 
-def insertion_sort(arr: list, ascending: bool = True, in_place: bool = False) -> None | list:
+def insertion_sort(arr: list, ascending: bool = True) -> None | list:
     '''
     Performs insertion sort on unsorted array.
     '''
     
-    if in_place:
-        for i in range(1, len(arr)):
-            j = i
-            if ascending:
-                while j > 0 and arr[j - 1] > arr[j]:
-                    arr[j - 1], arr[j] = arr[j], arr[j - 1]
-                    j -= 1
-            else:
-                while j > 0 and arr[j - 1] < arr[j]:
-                    arr[j - 1], arr[j] = arr[j], arr[j - 1]
-                    j -= 1
-    else:
-        sorted_arr = list(arr)
-        for i in range(1, len(sorted_arr)):
-            j = i
-            if ascending:
-                while j > 0 and sorted_arr[j - 1] > sorted_arr[j]:
-                    sorted_arr[j - 1], sorted_arr[j] = sorted_arr[j], sorted_arr[j - 1]
-                    j -= 1
-            else:
-                while j > 0 and sorted_arr[j - 1] < sorted_arr[j]:
-                    sorted_arr[j - 1], sorted_arr[j] = sorted_arr[j], sorted_arr[j - 1]
-                    j -= 1
-        return sorted_arr
+    for i in range(1, len(arr)):
+        j = i
+        if ascending:
+            while j > 0 and arr[j - 1] > arr[j]:
+                arr[j - 1], arr[j] = arr[j], arr[j - 1]
+                j -= 1
+        else:
+            while j > 0 and arr[j - 1] < arr[j]:
+                arr[j - 1], arr[j] = arr[j], arr[j - 1]
+                j -= 1
     
 
 def merge_sort(arr: list, ascending: bool = True) -> list:
@@ -140,7 +126,6 @@ def merge_sort(arr: list, ascending: bool = True) -> list:
         
 
 def quick_sort(arr, start_index = None, end_index = None):
-    # breaks when used, check logic
 
     def swap_vals(arr, a, b):
         '''Swaps values in-place in arr at indices a and b.'''
@@ -149,19 +134,24 @@ def quick_sort(arr, start_index = None, end_index = None):
             arr[a], arr[b] = arr[b], arr[a]
     
     def partition(arr, start_index, end_index):
+        ''''''
+
         pivot_index = start_index
         pivot_value = arr[pivot_index]
-        start_index = pivot_index + 1
-        end_index = len(arr) - 1
-        while start_index < end_index:
-            while start_index < len(arr) and arr[start_index] <= pivot_value:
-                start_index += 1
-            while arr[end_index] > pivot_value:
-                end_index -= 1
-            if start_index < end_index:
-                swap_vals(arr, start_index, end_index)
-        swap_vals(arr, end_index, pivot_index)
-        return end_index
+
+        left_index = pivot_index + 1
+        right_index = end_index
+        
+        while left_index <= right_index:
+            while left_index <= right_index and arr[left_index] <= pivot_value:
+                left_index += 1
+            while left_index <= right_index and arr[right_index] > pivot_value:
+                right_index -= 1
+            if left_index < right_index:
+                swap_vals(arr, left_index, right_index)
+        swap_vals(arr, right_index, pivot_index)
+        return right_index
+
 
     if start_index is None:
         start_index = 0
