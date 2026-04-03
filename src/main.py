@@ -45,6 +45,7 @@ def load_data(datapath: str, filename: str) -> list:
 def prompt_user_searching(data: list) -> None:
     '''Prompts user for choice relating to searching dataset and performs operation.'''
 
+    # TODO: sort before searching!
     while True:
         target_input = float(input('\nPlease enter a target value (enter "quit" to exit): '))
         if isinstance(float(target_input), numbers.Number): # validate target is a number
@@ -77,32 +78,39 @@ def prompt_user_searching(data: list) -> None:
 def prompt_user_sorting(data: list) -> None:
     '''Prompts user for choice relating to sorting dataset and performs operation.'''
 
-    # TODO: make all sorting algorithms in-place
-    # TODO: add ascendiing option
     while True:
         # add ascending / descending
-        sort_input = input('\nPlease enter a search algorithm (bubble, insertion, quick, merge) (enter "quit" to exit): ').lower()
-        if sort_input == 'bubble':
-            sorting.bubble_sort(data)
-            print(get_head(data, 10))
-            break
-        elif sort_input == 'insertion':
-            sorting.insertion_sort(data)
-            print(get_head(data, 10))
-            break
-        elif sort_input == 'quick':
-            sorting.quick_sort(data)
-            print(get_head(data, 10))
-            break
-        elif sort_input == 'merge':
-            sorting.merge_sort(data)
-            print(get_head(data, 10))
-            break
-        elif sort_input.lower() in ['q', 'quit']:
-            print('Quitting...\n')
-            break
+        ascending_input = input('\nPlease enter ascending or descending (enter "quit" to exit): ').lower()
+        if ascending_input in ['ascending', 'descending']:
+            
+            ascending = True
+            if ascending_input == 'descending':
+                ascending = False
+
+            sort_input = input('\nPlease enter a search algorithm (bubble, insertion, quick, merge) (enter "quit" to exit): ').lower()
+            if sort_input == 'bubble':
+                sorting.bubble_sort(data, ascending)
+                print(get_head(data, 10))
+                break
+            elif sort_input == 'insertion':
+                sorting.insertion_sort(data, ascending)
+                print(get_head(data, 10))
+                break
+            elif sort_input == 'quick':
+                sorting.quick_sort(data, ascending)
+                print(get_head(data, 10))
+                break
+            elif sort_input == 'merge':
+                sorting.merge_sort(data, ascending)
+                print(get_head(data, 10))
+                break
+            elif sort_input.lower() in ['q', 'quit']:
+                print('Quitting...\n')
+                break
+            else:
+                print('Please enter a valid input!\n')
         else:
-            print('Please enter a valid input!\n')
+            print('Please emter a valid input!\n')
 
 
 def prompt_user_merging(data: list) -> None:
