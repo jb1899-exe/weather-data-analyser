@@ -4,25 +4,25 @@ from .modules import user_interface
 def main() -> None:
 
     filepaths = [
-        'CityA_365.txt',
-        'CityB_365.txt',
-        'CityC_365.txt',
-        'CityA_1460.txt',
-        'CityB_1460.txt',
-        'CityC_1460.txt',
-        'CityN_100000.txt'
+        'CityA_365',
+        'CityB_365',
+        'CityC_365',
+        'CityA_1460',
+        'CityB_1460',
+        'CityC_1460',
+        'CityN_100000'
     ]
     datapath = 'data/'
 
     user_interface.print_filenames(filepaths)
 
-    # TODO: ensure the user is not redirected bakc here, load once then quit
     file_loaded = False
     while not file_loaded:
-        filename_input = input('\nPlease enter a filename to load (enter "quit" to exit): ') 
+        filename_input = input('\nPlease enter a dataset to load (enter "quit" to exit): ')
         if filename_input in filepaths:
-            data = user_interface.load_data(datapath, filename_input)
-            user_interface.user_selection(data, datapath, filepaths, filename_input)
+            filename = f'{filename_input}.txt'
+            data = user_interface.load_data(datapath, filename)
+            user_interface.user_selection(data, datapath, filepaths, filename)
             file_loaded = True
         elif filename_input.lower() in ['q', 'quit']:
             print('Quitting...\n')
