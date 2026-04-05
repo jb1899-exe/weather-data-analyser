@@ -15,25 +15,15 @@ def main() -> None:
     datapath = 'data/'
 
     user_interface.print_filenames(filepaths)
-    while True:
-        filename_input = input('\nPlease enter a filename to load (enter "quit" to exit): ')
+
+    # TODO: ensure the user is not redirected bakc here, load once then quit
+    file_loaded = False
+    while not file_loaded:
+        filename_input = input('\nPlease enter a filename to load (enter "quit" to exit): ') 
         if filename_input in filepaths:
             data = user_interface.load_data(datapath, filename_input)
-
-            while True:
-                operation_input = input('\nPlease enter an operation (search, sort, merge) (enter "quit" to exit): ').lower()
-                if operation_input == 'search':
-                    user_interface.prompt_user_searching(data)
-                elif operation_input == 'sort':
-                    user_interface.prompt_user_sorting(data)
-                elif operation_input == 'merge':
-                    user_interface.prompt_user_merging(data)
-                elif filename_input.lower() in ['q', 'quit']:
-                    print('Quitting...\n')
-                    break
-                else:
-                    print('Please enter a valid input!\n')
-        
+            user_interface.user_selection(data, datapath, filepaths, filename_input)
+            file_loaded = True
         elif filename_input.lower() in ['q', 'quit']:
             print('Quitting...\n')
             break
