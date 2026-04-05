@@ -1,4 +1,5 @@
-- Implement multiprocessing parallel merge sort.
-- Inlude notes on runtime complexity.
+- Write tests
 
-Figure out how to print n values for files independent of input file (e.g. after merge, data will be different len)
+- Fix filename when merged (e.g. sorting)
+
+- write README.md
