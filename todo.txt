@@ -1,5 +1,2 @@
-- Write tests
-
-- Fix filename when merged (e.g. sorting)
-
+- Fix quick sort test
 - write README.md
