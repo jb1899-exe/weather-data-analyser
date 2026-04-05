@@ -1,4 +1,4 @@
-- Include logic for misses in search functions.
 - Implement multiprocessing parallel merge sort.
 - Inlude notes on runtime complexity.
-- Merge data.
+
+Figure out how to print n values for files independent of input file (e.g. after merge, data will be different len)
