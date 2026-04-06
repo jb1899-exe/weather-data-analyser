@@ -17,7 +17,7 @@ def test_basic_correctness_all_algos():
         ("Bubble Sort", bubble_sort),
         ("Insertion Sort", insertion_sort), 
         ("Merge Sort", merge_sort),
-        # ("Quick Sort", quick_sort)
+        ("Quick Sort", quick_sort)
     ]
     
     for name, fn in algos:

@@ -1,2 +1,0 @@
-- Fix quick sort test
-- write README.md

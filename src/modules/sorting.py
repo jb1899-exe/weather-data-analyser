@@ -130,30 +130,43 @@ def merge_sort(arr: list, ascending: bool = True) -> list:
     # runtime of  n * log n = O(n log n) 
         
 
-def quick_sort(arr: list, start_index: int | None = None, end_index: int | None = None) -> list:
-    '''Performs quick sort and returns sorted array.'''
+def quick_sort(arr: list, start_index: int | None = None, end_index: int | None = None, ascending: bool =True) -> list:
+    '''Performs quick sort and returns sorted array in ascending or descending order.'''
+
+    # make copy of array 
+    new_arr = list(arr)
 
     if start_index is None:
         start_index = 0
     if end_index is None:
-        end_index = len(arr) - 1
+        end_index = len(new_arr) - 1
     if start_index >= end_index:
-        return list(arr)
+        return list(new_arr)
 
-    pivot_index = start_index
-    pivot_value = arr[pivot_index]
+    # select approximately middle pivot
+    pivot_index = (start_index + end_index) // 2
+    pivot_value = new_arr[pivot_index]
     left_arr = list()
     right_arr = list()
     for i in range(start_index, end_index + 1):
         if i == pivot_index:
             continue
-        if arr[i] <= pivot_value:
-            left_arr.append(arr[i])
-        else:
-            right_arr.append(arr[i])
-    left_arr_sorted = quick_sort(left_arr, 0, len(left_arr) - 1)
-    right_arr_sorted = quick_sort(right_arr, 0, len(right_arr) - 1)
-    return left_arr_sorted + [pivot_value] + right_arr_sorted
+        # add logic for ascending and descenging 
+        if ascending:
+            if new_arr[i] <= pivot_value:
+                left_arr.append(new_arr[i])
+            else:
+                right_arr.append(new_arr[i])
+        if not ascending:
+            if new_arr[i] >= pivot_value:
+                left_arr.append(new_arr[i])
+            else:
+                right_arr.append(new_arr[i])
+
+    left_arr_sorted = quick_sort(left_arr, 0, len(left_arr) - 1, ascending)
+    right_arr_sorted = quick_sort(right_arr, 0, len(right_arr) - 1, ascending)
+    sorted_arr =  left_arr_sorted + [pivot_value] + right_arr_sorted
+    return sorted_arr
 
     # Complexity notes:
     # The time complexity of quicksort depends largely on the choice of pivot
